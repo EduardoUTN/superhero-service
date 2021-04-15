@@ -1,5 +1,6 @@
 package com.edugo.superheroservice.controller;
 
+import com.edugo.superheroservice.api.TimeExecutionTracked;
 import com.edugo.superheroservice.domain.Superhero;
 import com.edugo.superheroservice.service.SuperheroService;
 import java.util.Collection;
@@ -29,6 +30,7 @@ public class SuperheroController {
     this.superheroService = superheroService;
   }
 
+  @TimeExecutionTracked
   @GetMapping
   public @ResponseBody Collection<Superhero> getAll(@RequestParam(required = false) String name) {
     if(!ObjectUtils.isEmpty(name)) {
@@ -37,16 +39,19 @@ public class SuperheroController {
     return superheroService.findAll();
   }
 
+  @TimeExecutionTracked
   @GetMapping("/{id}")
   public @ResponseBody Superhero findById(@PathVariable Long id) {
     return superheroService.findById(id);
   }
 
+  @TimeExecutionTracked
   @PutMapping("/{id}")
   public @ResponseBody Superhero updateSuperhero(@Valid @RequestBody Superhero heroUpdate, @PathVariable Long id) {
     return superheroService.updateSuperhero(id, heroUpdate);
   }
 
+  @TimeExecutionTracked
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteSuperhero(@PathVariable Long id) {
