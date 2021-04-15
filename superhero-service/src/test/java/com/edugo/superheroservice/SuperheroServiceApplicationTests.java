@@ -9,5 +9,4 @@ class SuperheroServiceApplicationTests {
   @Test
   void contextLoads() {
   }
-
 }

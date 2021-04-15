@@ -5,6 +5,7 @@ import com.edugo.superheroservice.service.SuperheroService;
 import java.util.Collection;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,10 @@ public class SuperheroController {
   @GetMapping
   public @ResponseBody Collection<Superhero> getAll() {
     return superheroService.findAll();
+  }
+
+  @GetMapping("/{id}")
+  public @ResponseBody Superhero findById(@PathVariable Long id) {
+    return superheroService.findById(id);
   }
 }
