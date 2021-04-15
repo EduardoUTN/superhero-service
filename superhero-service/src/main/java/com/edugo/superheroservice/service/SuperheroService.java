@@ -3,6 +3,8 @@ package com.edugo.superheroservice.service;
 import com.edugo.superheroservice.domain.Superhero;
 import com.edugo.superheroservice.repository.SuperheroRepository;
 import java.util.Collection;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,14 @@ public class SuperheroService implements BaseService<Superhero> {
     return superheroRepository.findById(id)
         .orElseThrow(() -> new EntityNotFoundException(
             String.format("Superhero with id: %s - Not Found", id)));
+  }
+
+  public Collection<Superhero> searchByName(String name) {
+    // Only to Demonstrate stream filtering, same result can be obtained with
+    // superheroRepository.findByNameContainingIgnoreCase(name)
+    // and Unit Test
+    return superheroRepository.findAll().stream()
+        .filter(hero -> Objects.nonNull(name) && hero.getName().toLowerCase().contains(name))
+        .collect(Collectors.toList());
   }
 }

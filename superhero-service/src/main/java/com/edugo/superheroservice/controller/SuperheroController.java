@@ -4,9 +4,11 @@ import com.edugo.superheroservice.domain.Superhero;
 import com.edugo.superheroservice.service.SuperheroService;
 import java.util.Collection;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +24,10 @@ public class SuperheroController {
   }
 
   @GetMapping
-  public @ResponseBody Collection<Superhero> getAll() {
+  public @ResponseBody Collection<Superhero> getAll(@RequestParam(required = false) String name) {
+    if(!ObjectUtils.isEmpty(name)) {
+      return superheroService.searchByName(name);
+    }
     return superheroService.findAll();
   }
 

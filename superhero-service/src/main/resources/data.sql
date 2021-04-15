@@ -4,4 +4,6 @@ INSERT INTO superhero (name) VALUES
 ('The Flash'),
 ('Doctor Strange'),
 ('Black Widow'),
-('Batman');
+('Batman'),
+('Man Bat'),
+('Manolito el fuerte');
