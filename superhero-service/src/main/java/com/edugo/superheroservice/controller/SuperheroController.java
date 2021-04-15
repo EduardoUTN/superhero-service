@@ -40,7 +40,7 @@ public class SuperheroController {
   }
 
   @PutMapping("/{id}")
-  public @ResponseBody Superhero updateSuperhero(@PathVariable Long id, @Valid @RequestBody Superhero heroUpdate) {
+  public @ResponseBody Superhero updateSuperhero(@Valid @RequestBody Superhero heroUpdate, @PathVariable Long id) {
     return superheroService.updateSuperhero(id, heroUpdate);
   }
 }
