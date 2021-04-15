@@ -1,0 +1,15 @@
+version: '2'
+services:
+  superhero-service:
+    container_name: superhero-service
+    build:
+      context: superhero-service
+      dockerfile: superhero-service/Dockerfile
+    image: superhero-service:latest
+    ports:
+      - 8887:8080
+    networks:
+      - spring-cloud-network
+networks:
+  spring-cloud-network:
+    driver: bridge
