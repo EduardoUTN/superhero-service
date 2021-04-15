@@ -5,10 +5,16 @@ import com.edugo.superheroservice.repository.SuperheroRepository;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
 import javax.persistence.EntityNotFoundException;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames={"superheros"})
 public class SuperheroService implements BaseService<Superhero> {
 
   private final SuperheroRepository superheroRepository;
@@ -23,6 +29,7 @@ public class SuperheroService implements BaseService<Superhero> {
   }
 
   @Override
+  @Cacheable
   public Superhero findById(Long id) throws EntityNotFoundException {
     return superheroRepository.findById(id)
         .orElseThrow(() -> new EntityNotFoundException(
@@ -30,6 +37,7 @@ public class SuperheroService implements BaseService<Superhero> {
   }
 
   @Override
+  @CachePut(key = "#id")
   public Superhero updateSuperhero(Long id, Superhero heroUpdate) {
     return superheroRepository.findById(id)
         .map(hero -> updateSuperhero(hero, heroUpdate))
@@ -38,6 +46,7 @@ public class SuperheroService implements BaseService<Superhero> {
   }
 
   @Override
+  @CacheEvict(key = "#id", allEntries = true)
   public void deleteById(Long id) {
     superheroRepository.deleteById(id);
   }
