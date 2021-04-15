@@ -20,3 +20,6 @@ Before running, verify that you installed:
 ### Running Docker container ###
 * From repository root directory
 * Run `make up`
+* Swagger API Doc Url: `http://localhost:8887/swagger-ui.html`
+* H2 console: `http://localhost:8887/h2-console`
+* Spring Security and H2 credentials location: `src/main/resources/application.properties`
