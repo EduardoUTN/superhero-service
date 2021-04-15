@@ -10,4 +10,6 @@ public interface BaseService<T> {
   T findById(Long id) throws EntityNotFoundException;
 
   T updateSuperhero(Long id, T clazz);
+
+  void deleteById(Long id);
 }

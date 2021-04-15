@@ -37,6 +37,11 @@ public class SuperheroService implements BaseService<Superhero> {
             String.format("Superhero with id: %s - Not Found", id)));
   }
 
+  @Override
+  public void deleteById(Long id) {
+    superheroRepository.deleteById(id);
+  }
+
   public Collection<Superhero> searchByName(String name) {
     // Only to Demonstrate stream filtering, same result can be obtained with
     // superheroRepository.findByNameContainingIgnoreCase(name)
