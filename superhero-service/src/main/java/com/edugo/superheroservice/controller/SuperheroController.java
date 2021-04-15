@@ -3,10 +3,13 @@ package com.edugo.superheroservice.controller;
 import com.edugo.superheroservice.domain.Superhero;
 import com.edugo.superheroservice.service.SuperheroService;
 import java.util.Collection;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,5 +37,10 @@ public class SuperheroController {
   @GetMapping("/{id}")
   public @ResponseBody Superhero findById(@PathVariable Long id) {
     return superheroService.findById(id);
+  }
+
+  @PutMapping("/{id}")
+  public @ResponseBody Superhero updateSuperhero(@PathVariable Long id, @Valid @RequestBody Superhero heroUpdate) {
+    return superheroService.updateSuperhero(id, heroUpdate);
   }
 }

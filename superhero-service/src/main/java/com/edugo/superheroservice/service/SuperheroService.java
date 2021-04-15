@@ -29,6 +29,14 @@ public class SuperheroService implements BaseService<Superhero> {
             String.format("Superhero with id: %s - Not Found", id)));
   }
 
+  @Override
+  public Superhero updateSuperhero(Long id, Superhero heroUpdate) {
+    return superheroRepository.findById(id)
+        .map(hero -> updateSuperhero(hero, heroUpdate))
+        .orElseThrow(() -> new EntityNotFoundException(
+            String.format("Superhero with id: %s - Not Found", id)));
+  }
+
   public Collection<Superhero> searchByName(String name) {
     // Only to Demonstrate stream filtering, same result can be obtained with
     // superheroRepository.findByNameContainingIgnoreCase(name)
@@ -36,5 +44,10 @@ public class SuperheroService implements BaseService<Superhero> {
     return superheroRepository.findAll().stream()
         .filter(hero -> Objects.nonNull(name) && hero.getName().toLowerCase().contains(name))
         .collect(Collectors.toList());
+  }
+
+  private Superhero updateSuperhero(Superhero hero, Superhero heroUpdate) {
+    hero.setName(heroUpdate.getName());
+    return superheroRepository.save(hero);
   }
 }

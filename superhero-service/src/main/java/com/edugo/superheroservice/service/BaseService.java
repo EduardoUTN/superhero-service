@@ -7,5 +7,7 @@ public interface BaseService<T> {
 
   Collection<T> findAll();
 
-  T findById(Long is) throws EntityNotFoundException;
+  T findById(Long id) throws EntityNotFoundException;
+
+  T updateSuperhero(Long id, T clazz);
 }
