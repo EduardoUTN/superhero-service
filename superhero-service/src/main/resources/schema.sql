@@ -1,0 +1,1 @@
+CREATE TABLE superhero (id bigint NOT NULL AUTO_INCREMENT,name VARCHAR(255), PRIMARY KEY (id));
